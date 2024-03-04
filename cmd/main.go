@@ -11,14 +11,14 @@ import (
 func main() {
 
 	// inisialisasi DB
-	_, err := pkg.InitMysql()
+	db, err := pkg.InitMysql()
 	if err != nil {
 
 		log.Fatal(err)
 		// os.Exit() atau log.Fatal(err) sama dengan return
 	}
 	// inisialisasi Router
-	router := routes.InitRouter()
+	router := routes.InitRouter(db)
 	// inisialisasi Server
 	server := pkg.InitServer(router)
 	// jalankan server

@@ -4,9 +4,10 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/jmoiron/sqlx"
 )
 
-func InitRouter() *gin.Engine {
+func InitRouter(db *sqlx.DB) *gin.Engine {
 	router := gin.Default()
 
 	// buat rute nya
@@ -14,6 +15,8 @@ func InitRouter() *gin.Engine {
 		ctx.String(http.StatusOK, "Hello World")
 	})
 
+	InitAuthRouter(router, db)
+	InitBookRouter(router, db)
 	return router
 
 }
